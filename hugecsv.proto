@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+package hugecsv;
+
+service HugeCSV {
+    rpc Send (stream Item) returns (Summary) {
+    }
+}
+
+message Item {
+    int32 PersonID = 1;
+    int32 Sex = 2;
+    int32 StndY = 3;
+    int32 AgeGroup = 4;
+    int32 Sido = 5;
+    int32 Sgg = 6;
+    int32 KeySeq = 7;
+    int32 YkihoID = 8;
+    int32 RecuFrDt = 9;
+    int32 DsbjtCd = 10;
+    int32 DmdTramt = 11;
+    int32 DmdSbrdnAmt = 12;
+    string MainSick = 13;
+    string SubSick = 14;
+    int32 YkihoGubunCd = 15;
+    int32 YkihoSido = 16;
+}
+
+message Summary {
+    int32 processed = 1;
+}

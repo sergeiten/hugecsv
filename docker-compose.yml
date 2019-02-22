@@ -1,0 +1,31 @@
+version: '3'
+services:
+  reader:
+    depends_on:
+      - consumer
+    build:
+      context: .
+      dockerfile: docker/reader/Dockerfile
+    image: sergeiten/hugecsv-reader:v1
+#    mem_limit: 200M
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+    restart: "no"
+    volumes:
+      - ./:/data
+  consumer:
+    build:
+      context: .
+      dockerfile: docker/consumer/Dockerfile
+    image: sergeiten/hugecsv-consumer:v1
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_PORT=${DB_PORT}
+    restart: "no"
